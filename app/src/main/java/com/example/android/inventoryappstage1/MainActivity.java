@@ -106,7 +106,5 @@ public class MainActivity extends AppCompatActivity {
         values.put(InventoryEntry.COLUMN_BOOK_QUANTITY, 3);
         values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME, "Little, Brown and Company");
         values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE, "(312) 555-5555");
-
-        long newRowId = db.insert(InventoryEntry.TABLE_NAME, null, values);
     }
 }
