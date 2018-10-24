@@ -33,25 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayDatabaseInfo() {
 
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        String[] projection = {
-                InventoryEntry._ID,
-                InventoryEntry.COLUMN_BOOK_TITLE,
-                InventoryEntry.COLUMN_BOOK_AUTHOR,
-                InventoryEntry.COLUMN_BOOK_PRICE,
-                InventoryEntry.COLUMN_BOOK_QUANTITY,
-                InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME,
-                InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE };
-
-        Cursor cursor = db.query(
-                InventoryEntry.TABLE_NAME,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                null);
-
+        Cursor cursor = queryData();
         try {
             displayView.setText("The inventory table contains " +cursor.getCount()+ " books.\n\n");
             displayView.append(InventoryEntry._ID + " - " +
@@ -88,6 +70,30 @@ public class MainActivity extends AppCompatActivity {
         } finally {
             cursor.close();
         }
+    }
+
+    private Cursor queryData() {
+
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        String[] projection = {
+                InventoryEntry._ID,
+                InventoryEntry.COLUMN_BOOK_TITLE,
+                InventoryEntry.COLUMN_BOOK_AUTHOR,
+                InventoryEntry.COLUMN_BOOK_PRICE,
+                InventoryEntry.COLUMN_BOOK_QUANTITY,
+                InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME,
+                InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE };
+
+        Cursor cursor = db.query(
+                InventoryEntry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        return cursor;
     }
 
     private void insertData() {
