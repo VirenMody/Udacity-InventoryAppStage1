@@ -1,10 +1,15 @@
 package com.example.android.inventoryappstage1;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.android.inventoryappstage1.data.InventoryDbHelper;
@@ -22,7 +27,16 @@ public class MainActivity extends AppCompatActivity {
 
         displayView = (TextView) findViewById(R.id.text_view_inventory);
         mDbHelper = new InventoryDbHelper(this);
-        insertData();
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floating_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -106,5 +120,20 @@ public class MainActivity extends AppCompatActivity {
         values.put(InventoryEntry.COLUMN_BOOK_QUANTITY, 3);
         values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME, "Little, Brown and Company");
         values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE, "(312) 555-5555");
+
+        db.insert(InventoryEntry.TABLE_NAME, null, values);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_catalog, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onToptionsItemSelected(MenuItem item) {
+//        switch(item.getItemId());
+//        return super.onOptionsItemSelected(item);
+        return true;
     }
 }
