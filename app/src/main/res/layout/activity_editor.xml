@@ -30,38 +30,31 @@
 
             <!-- Book Title field -->
             <EditText
-                android:id="@+id/book_title"
+                android:id="@+id/edit_book_title"
                 android:hint="@string/hint_book_title"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
             <!-- Book Author field -->
             <EditText
-                android:id="@+id/author"
+                android:id="@+id/edit_author"
                 android:hint="@string/hint_author"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
             <!-- Book Price field -->
             <EditText
-                android:id="@+id/price"
+                android:id="@+id/edit_price"
                 android:hint="@string/hint_price"
-                android:inputType="textCapWords"
+                android:inputType="numberDecimal"
                 style="@style/EditorFieldStyle" />
 
-            <!-- Book Quantity field: spinner-->
+            <!-- Book Quantity field -->
             <EditText
-                android:id="@+id/quantity"
+                android:id="@+id/edit_quantity"
                 android:hint="@string/hint_quantity"
-                android:inputType="textCapWords"
+                android:inputType="number"
                 style="@style/EditorFieldStyle" />
-            <!-- Gender drop-down spinner -->
-            <Spinner
-                android:id="@+id/spinner_quantity"
-                android:layout_height="48dp"
-                android:layout_width="wrap_content"
-                android:paddingRight="16dp"
-                android:spinnerMode="dropdown"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -85,16 +78,16 @@
 
             <!-- Supplier Name field -->
             <EditText
-                android:id="@+id/supplier_name"
+                android:id="@+id/edit_supplier_name"
                 android:hint="@string/hint_supplier_name"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
             <!-- Supplier Phone field -->
             <EditText
-                android:id="@+id/supplier_phone"
+                android:id="@+id/edit_supplier_phone"
                 android:hint="@string/hint_supplier_phone"
-                android:inputType="textCapWords"
+                android:inputType="phone"
                 style="@style/EditorFieldStyle" />
 
         </LinearLayout>
