@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Taken from Udacity: ud845-Pets and modified for my app -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_medium"
+    tools:context=".EditorActivity">
+
+    <!-- Book related fields -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Book Category Label -->
+        <TextView
+            android:text="@string/category_book"
+            style="@style/CategoryStyle" />
+
+        <!-- Input fields -->
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="@dimen/spacing_zero"
+            android:layout_weight="2"
+            android:paddingLeft="@dimen/spacing_extra_small"
+            android:orientation="vertical">
+
+            <!-- Book Title field -->
+            <EditText
+                android:id="@+id/book_title"
+                android:hint="@string/hint_book_title"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
+
+            <!-- Book Author field -->
+            <EditText
+                android:id="@+id/author"
+                android:hint="@string/hint_author"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
+
+            <!-- Book Price field -->
+            <EditText
+                android:id="@+id/price"
+                android:hint="@string/hint_price"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
+
+            <!-- Book Quantity field: spinner-->
+            <EditText
+                android:id="@+id/quantity"
+                android:hint="@string/hint_quantity"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
+            <!-- Gender drop-down spinner -->
+            <Spinner
+                android:id="@+id/spinner_quantity"
+                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:paddingRight="16dp"
+                android:spinnerMode="dropdown"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Supplier related fields -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Supplier Category Label -->
+        <TextView
+            android:text="@string/category_supplier"
+            style="@style/CategoryStyle" />
+
+        <!-- Input field -->
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="@dimen/spacing_zero"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <!-- Supplier Name field -->
+            <EditText
+                android:id="@+id/supplier_name"
+                android:hint="@string/hint_supplier_name"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
+
+            <!-- Supplier Phone field -->
+            <EditText
+                android:id="@+id/supplier_phone"
+                android:hint="@string/hint_supplier_phone"
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
