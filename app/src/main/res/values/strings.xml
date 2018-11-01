@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Inventory App - Stage 1</string>
+    <string name="app_name">Book Store Inventory App</string>
     <string name="category_book_title">Book Title</string>
     <string name="hint_book_title">Title</string>
     <string name="category_book">Book Info</string>
