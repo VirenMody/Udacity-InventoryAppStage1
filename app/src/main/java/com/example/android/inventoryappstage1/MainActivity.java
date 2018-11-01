@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         return cursor;
     }
 
-    private void insertData() {
+    private void insertBook() {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -126,14 +126,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_catalog, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onToptionsItemSelected(MenuItem item) {
-//        switch(item.getItemId());
-//        return super.onOptionsItemSelected(item);
-        return true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_insert_dummy_data:
+                insertBook();
+                displayDatabaseInfo();
+                return true;
+            case R.id.action_delete_all_entries:
+                //TODO
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
