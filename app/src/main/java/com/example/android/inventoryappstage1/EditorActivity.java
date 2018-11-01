@@ -2,6 +2,7 @@ package com.example.android.inventoryappstage1;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.widget.EditText;
 
 public class EditorActivity extends AppCompatActivity {
@@ -26,4 +27,9 @@ public class EditorActivity extends AppCompatActivity {
         mSupplierPhone = (EditText) findViewById(R.id.edit_supplier_phone);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_editor, menu);
+        return true;
+    }
 }
