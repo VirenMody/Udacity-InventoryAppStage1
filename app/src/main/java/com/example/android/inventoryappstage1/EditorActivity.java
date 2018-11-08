@@ -66,7 +66,7 @@ public class EditorActivity extends AppCompatActivity {
         return true;
     }
 
-//  Taken from Udacity: ud845-Pets and modified for my app
+    //  Taken from Udacity: ud845-Pets and modified for my app
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
