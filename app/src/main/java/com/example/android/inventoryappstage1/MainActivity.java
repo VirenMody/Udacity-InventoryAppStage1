@@ -3,21 +3,22 @@ package com.example.android.inventoryappstage1;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
-import android.support.design.widget.FloatingActionButton;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.android.inventoryappstage1.data.InventoryDbHelper;
 import com.example.android.inventoryappstage1.data.InventoryContract.InventoryEntry;
 
 public class MainActivity extends AppCompatActivity {
 
-    InventoryDbHelper mDbHelper;
     TextView displayView;
 
     @Override
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         displayView = (TextView) findViewById(R.id.text_view_inventory);
-        mDbHelper = new InventoryDbHelper(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floating_button);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -39,12 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onStart() {
         super.onStart();
         displayDatabaseInfo();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void displayDatabaseInfo() {
 
         Cursor cursor = queryData();
@@ -86,9 +88,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private Cursor queryData() {
 
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
         String[] projection = {
                 InventoryEntry._ID,
                 InventoryEntry.COLUMN_BOOK_TITLE,
@@ -98,12 +100,9 @@ public class MainActivity extends AppCompatActivity {
                 InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME,
                 InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE };
 
-        Cursor cursor = db.query(
-                InventoryEntry.TABLE_NAME,
+        Cursor cursor = getContentResolver().query(
+                InventoryEntry.CONTENT_URI,
                 projection,
-                null,
-                null,
-                null,
                 null,
                 null);
 
@@ -111,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void insertBook() {
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(InventoryEntry.COLUMN_BOOK_TITLE, "Outliers");
@@ -121,7 +119,15 @@ public class MainActivity extends AppCompatActivity {
         values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME, "Little, Brown and Company");
         values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE, "(312) 555-5555");
 
-        db.insert(InventoryEntry.TABLE_NAME, null, values);
+        Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
+        if(null == newUri) {
+            Toast.makeText(this, getString(R.string.editor_insert_book_failed),
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, getString(R.string.editor_insert_book_successful),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -130,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
