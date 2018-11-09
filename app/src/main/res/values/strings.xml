@@ -13,4 +13,7 @@
     <string name="action_delete_all_entries">Delete All Entries</string>
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
+
+    <string name="editor_insert_book_failed">Error adding book!</string>
+    <string name="editor_insert_book_successful">Book added to inventory!</string>
 </resources>

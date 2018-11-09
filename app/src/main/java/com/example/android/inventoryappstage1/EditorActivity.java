@@ -1,20 +1,18 @@
 package com.example.android.inventoryappstage1;
 
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.example.android.inventoryappstage1.data.InventoryDbHelper;
 import com.example.android.inventoryappstage1.data.InventoryContract.InventoryEntry;
 
 public class EditorActivity extends AppCompatActivity {
-
-    InventoryDbHelper mDbHelper;
 
     private EditText mTitleEditText;
     private EditText mAuthorEditText;
@@ -27,8 +25,6 @@ public class EditorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
-
-        mDbHelper = new InventoryDbHelper(this);
 
         mTitleEditText = (EditText) findViewById(R.id.edit_book_title);
         mAuthorEditText = (EditText) findViewById(R.id.edit_author);
@@ -47,8 +43,6 @@ public class EditorActivity extends AppCompatActivity {
         String supplierName = mSupplierNameEditText.getText().toString().trim();
         String supplierPhone = mSupplierPhoneEditText.getText().toString().trim();
 
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(InventoryEntry.COLUMN_BOOK_TITLE, title);
         values.put(InventoryEntry.COLUMN_BOOK_AUTHOR, author);
@@ -57,7 +51,15 @@ public class EditorActivity extends AppCompatActivity {
         values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME, supplierName);
         values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE, supplierPhone);
 
-        db.insert(InventoryEntry.TABLE_NAME, null, values);
+        Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
+        if(null == newUri) {
+            Toast.makeText(this, getString(R.string.editor_insert_book_failed),
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, getString(R.string.editor_insert_book_successful),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
