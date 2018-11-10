@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Book Store Inventory App</string>
     <string name="category_book_title">Book Title</string>
     <string name="hint_book_title">Title</string>
@@ -16,5 +16,11 @@
 
     <string name="editor_insert_book_failed">Error adding book!</string>
     <string name="editor_insert_book_successful">Book added to inventory!</string>
+
     <string name="empty_view_text">There are no books in the inventory!</string>
+
+    <string name="item_quantity">Quantity: <xliff:g id="quantity" example="5">%s</xliff:g></string>
+    <string name="item_price">Price: <xliff:g id="price" example="$5.00">%s</xliff:g></string>
+    <string name="item_supplier">Supplier: <xliff:g id="supplier" example="Publishers">%s</xliff:g></string>
+    <string name="item_supplier_phone">Supplier No.: <xliff:g id="supplier_phone" example="(312) 555-5555">%s</xliff:g></string>
 </resources>
