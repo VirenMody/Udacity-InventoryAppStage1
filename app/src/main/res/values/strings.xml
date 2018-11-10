@@ -16,4 +16,5 @@
 
     <string name="editor_insert_book_failed">Error adding book!</string>
     <string name="editor_insert_book_successful">Book added to inventory!</string>
+    <string name="empty_view_title_text">There are no books in the inventory!</string>
 </resources>
