@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
                 Intent intent = new Intent(MainActivity.this, EditorActivity.class);
                 Uri currentInventoryUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id);
+                Log.e(LOG_TAG, currentInventoryUri.toString());
                 intent.setData(currentInventoryUri);
                 startActivity(intent);
             }
@@ -128,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        mCursorAdapter.swapCursor(cursor);
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mCursorAdapter.swapCursor(data);
     }
 
     @Override
