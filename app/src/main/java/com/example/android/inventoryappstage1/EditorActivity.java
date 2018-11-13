@@ -76,6 +76,7 @@ public class EditorActivity extends AppCompatActivity implements
         mQuantityEditText = (EditText) findViewById(R.id.edit_quantity);
         mSupplierNameEditText = (EditText) findViewById(R.id.edit_supplier_name);
         mSupplierPhoneEditText = (EditText) findViewById(R.id.edit_supplier_phone);
+        mIncrementQuantityBtn = (Button) findViewById(R.id.quantity_increment);
         mIncrementQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +99,7 @@ public class EditorActivity extends AppCompatActivity implements
                 mQuantityEditText.setText(strQuantity);
             }
         });
+        mDecrementQuantityBtn = (Button) findViewById(R.id.quantity_decrement);
         mDecrementQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
