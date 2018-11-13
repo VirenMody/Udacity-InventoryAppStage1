@@ -38,7 +38,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
         int supplierPhoneColumnIndex = cursor.getColumnIndex(InventoryEntry
                 .COLUMN_BOOK_SUPPLIER_PHONE);
 
-        String title_author = cursor.getString(titleColumnIndex) + cursor.getString(authorColumnIndex);
+        String title_author = cursor.getString(titleColumnIndex) + " by " + cursor.getString(authorColumnIndex);
         String quantity = context.getResources().getString(R.string.item_quantity, cursor.getString(quantityColumnIndex));
         String price = context.getResources().getString(R.string.item_price, cursor.getString(priceColumnIndex));
         String supplier = context.getResources().getString(R.string.item_supplier, cursor.getString(supplierColumnIndex));
