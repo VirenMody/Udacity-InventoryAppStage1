@@ -202,7 +202,7 @@ public class InventoryProvider extends ContentProvider {
 
         if (contentValues.containsKey(InventoryEntry.COLUMN_BOOK_QUANTITY)) {
             Integer quantity = contentValues.getAsInteger(InventoryEntry.COLUMN_BOOK_QUANTITY);
-            if(null == quantity || quantity < 1) {
+            if(null == quantity || quantity < 0) {
                 throw new IllegalArgumentException("Book requires a valid quantity");
             }
         }
