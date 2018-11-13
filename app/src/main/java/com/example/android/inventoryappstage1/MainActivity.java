@@ -116,9 +116,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 InventoryEntry.COLUMN_BOOK_TITLE,
                 InventoryEntry.COLUMN_BOOK_AUTHOR,
                 InventoryEntry.COLUMN_BOOK_PRICE,
-                InventoryEntry.COLUMN_BOOK_QUANTITY,
-                InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME,
-                InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE };
+                InventoryEntry.COLUMN_BOOK_QUANTITY };
 
         return new CursorLoader(this,
                 InventoryEntry.CONTENT_URI,
