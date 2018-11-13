@@ -39,4 +39,6 @@
     <string name="quantity_display">Quantity: #</string>
     <string name="display_price">Price: $</string>
     <string name="button_sale">Sale</string>
+    <string name="button_increment">+</string>
+    <string name="button_decrement">-</string>
 </resources>
