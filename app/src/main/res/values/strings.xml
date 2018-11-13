@@ -36,4 +36,7 @@
     <string name="unsaved_changes_dialog_msg">Discard changes and quit editing?</string>
     <string name="discard">Discard</string>
     <string name="continue_editing">Continue Editing</string>
+    <string name="quantity_display">Quantity: #</string>
+    <string name="display_price">Price: $</string>
+    <string name="button_sale">Sale</string>
 </resources>
