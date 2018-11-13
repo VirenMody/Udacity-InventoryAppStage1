@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -37,6 +38,8 @@ public class EditorActivity extends AppCompatActivity implements
     private EditText mQuantityEditText;
     private EditText mSupplierNameEditText;
     private EditText mSupplierPhoneEditText;
+    private Button mIncrementQuantityBtn;
+    private Button mDecrementQuantityBtn;
 
     private boolean mBookHasChanged = false;
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
@@ -53,6 +56,7 @@ public class EditorActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_editor);
 
         Intent intent = getIntent();
+        //TODO remove log.e messages or change to log.d
         Log.e(LOG_TAG, intent.toString());
         mCurrentBookUri = intent.getData();
         Log.e(LOG_TAG, mCurrentBookUri + "");
@@ -72,6 +76,50 @@ public class EditorActivity extends AppCompatActivity implements
         mQuantityEditText = (EditText) findViewById(R.id.edit_quantity);
         mSupplierNameEditText = (EditText) findViewById(R.id.edit_supplier_name);
         mSupplierPhoneEditText = (EditText) findViewById(R.id.edit_supplier_phone);
+        mIncrementQuantityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String strQuantity = mQuantityEditText.getText().toString().trim();
+                if(!TextUtils.isEmpty(strQuantity)) {
+                    int quantity = Integer.parseInt(strQuantity);
+                    if(quantity < 100) {
+                        Log.d(LOG_TAG, "Before increment, quantity = " + strQuantity);
+                        strQuantity = String.valueOf(++quantity);
+                        Log.d(LOG_TAG, "After increment, quantity = " + strQuantity);
+                    }
+                    else {
+                        Toast.makeText(EditorActivity.this, getString(R.string.editor_max_books),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    strQuantity = "1";
+                }
+                mQuantityEditText.setText(strQuantity);
+            }
+        });
+        mDecrementQuantityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String strQuantity = mQuantityEditText.getText().toString().trim();
+                if(!TextUtils.isEmpty(strQuantity)) {
+                    int quantity = Integer.parseInt(strQuantity);
+                    if(quantity > 0) {
+                        Log.d(LOG_TAG, "Before decrement, quantity = " + strQuantity);
+                        strQuantity = String.valueOf(--quantity);
+                        Log.d(LOG_TAG, "After decrement, quantity = " + strQuantity);
+                    }
+                    else {
+                        Toast.makeText(EditorActivity.this, getString(R.string.editor_min_books),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    strQuantity = "0";
+                }
+                mQuantityEditText.setText(strQuantity);
+            }
+        });
 
         mTitleEditText.setOnTouchListener(mTouchListener);
         mAuthorEditText.setOnTouchListener(mTouchListener);
@@ -195,7 +243,7 @@ public class EditorActivity extends AppCompatActivity implements
                 InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE };
 
         return new CursorLoader(this,
-                InventoryEntry.CONTENT_URI,
+                mCurrentBookUri,
                 projection,
                 null,
                 null,
@@ -204,6 +252,7 @@ public class EditorActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        Log.e(LOG_TAG, "In onLoadFinished - cursor = " + cursor + " " + "  cursor count = " + cursor.getCount());
         if (cursor == null || cursor.getCount() < 1) {
             return;
         }
@@ -224,6 +273,7 @@ public class EditorActivity extends AppCompatActivity implements
             String supplier = cursor.getString(supplierColumnIndex);
             String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
 
+            Log.e(LOG_TAG, "In onLoadFinished - " + title + author + quantity + price);
             mTitleEditText.setText(title);
             mAuthorEditText.setText(author);
             mQuantityEditText.setText(Integer.toString(quantity));

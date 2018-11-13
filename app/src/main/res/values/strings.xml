@@ -41,4 +41,6 @@
     <string name="button_sale">Sale</string>
     <string name="button_increment">+</string>
     <string name="button_decrement">-</string>
+    <string name="editor_max_books">Maximum number of books is 100.</string>
+    <string name="editor_min_books">The minimum number of books is 0.</string>
 </resources>
