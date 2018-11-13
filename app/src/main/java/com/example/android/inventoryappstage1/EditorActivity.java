@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -24,6 +25,8 @@ import com.example.android.inventoryappstage1.data.InventoryContract.InventoryEn
 
 public class EditorActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
+
+    public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private static final int EXISTING_BOOK_LOADER = 0;
 
@@ -50,7 +53,10 @@ public class EditorActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_editor);
 
         Intent intent = getIntent();
+        Log.e(LOG_TAG, intent.toString());
         mCurrentBookUri = intent.getData();
+        Log.e(LOG_TAG, mCurrentBookUri + "");
+
         if(null == mCurrentBookUri) {
             setTitle(getString(R.string.editor_activity_title_new_book));
             invalidateOptionsMenu();
