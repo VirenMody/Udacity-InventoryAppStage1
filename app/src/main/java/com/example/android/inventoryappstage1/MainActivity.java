@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
                 Intent intent = new Intent(MainActivity.this, EditorActivity.class);
                 Uri currentInventoryUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id);
-                Log.e(LOG_TAG, currentInventoryUri.toString());
+                Log.d(LOG_TAG, currentInventoryUri.toString());
                 intent.setData(currentInventoryUri);
                 startActivity(intent);
             }

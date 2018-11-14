@@ -56,10 +56,9 @@ public class EditorActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_editor);
 
         Intent intent = getIntent();
-        //TODO remove log.e messages or change to log.d
-        Log.e(LOG_TAG, intent.toString());
+        Log.d(LOG_TAG, intent.toString());
         mCurrentBookUri = intent.getData();
-        Log.e(LOG_TAG, mCurrentBookUri + "");
+        Log.d(LOG_TAG, mCurrentBookUri + "");
 
         if(null == mCurrentBookUri) {
             setTitle(getString(R.string.editor_activity_title_new_book));
@@ -207,8 +206,6 @@ public class EditorActivity extends AppCompatActivity implements
             return;
         }
 
-
-        // TODO Ensure that the values are not empty
         double price = Double.parseDouble(strPrice);
         int quantity = Integer.parseInt(strQuantity);
 
@@ -311,7 +308,8 @@ public class EditorActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        Log.e(LOG_TAG, "In onLoadFinished - cursor = " + cursor + " " + "  cursor count = " + cursor.getCount());
+        Log.d(LOG_TAG, "In onLoadFinished - cursor = " + cursor + " " + "  cursor count = " +
+                cursor.getCount());
         if (cursor == null || cursor.getCount() < 1) {
             return;
         }
@@ -332,7 +330,7 @@ public class EditorActivity extends AppCompatActivity implements
             String supplier = cursor.getString(supplierColumnIndex);
             String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
 
-            Log.e(LOG_TAG, "In onLoadFinished - " + title + author + quantity + price);
+            Log.d(LOG_TAG, "In onLoadFinished - " + title + author + quantity + price);
             mTitleEditText.setText(title);
             mAuthorEditText.setText(author);
             mQuantityEditText.setText(Integer.toString(quantity));
