@@ -43,4 +43,11 @@
     <string name="button_decrement">-</string>
     <string name="editor_max_books">Maximum number of books is 100.</string>
     <string name="editor_min_books">The minimum number of books is 0.</string>
+    <string name="editor_min_price_warning">Minimum price must be $0.01.</string>
+    <string name="editor_min_price">0.01</string>
+    <string name="editor_required_field">Required field.</string>
+    <string name="editor_quantity_range_warning">The quantity must be between 0 and 100.</string>
+    <string name="editor_max_quantity">100</string>
+    <string name="editor_min_quantity">0</string>
+    <string name="editor_all_fields_required">All fields are required.</string>
 </resources>

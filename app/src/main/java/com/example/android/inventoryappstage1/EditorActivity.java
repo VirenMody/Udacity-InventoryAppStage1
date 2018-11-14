@@ -89,6 +89,7 @@ public class EditorActivity extends AppCompatActivity implements
                         Log.d(LOG_TAG, "After increment, quantity = " + strQuantity);
                     }
                     else {
+                        mQuantityEditText.setText(getString(R.string.editor_max_quantity));
                         Toast.makeText(EditorActivity.this, getString(R.string.editor_max_books),
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -112,6 +113,7 @@ public class EditorActivity extends AppCompatActivity implements
                         Log.d(LOG_TAG, "After decrement, quantity = " + strQuantity);
                     }
                     else {
+                        mQuantityEditText.setText(getString(R.string.editor_min_quantity));
                         Toast.makeText(EditorActivity.this, getString(R.string.editor_min_books),
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -133,7 +135,8 @@ public class EditorActivity extends AppCompatActivity implements
 
     private void saveBook() {
 
-        // TODO force user to fill all fields - check JustJava project
+        final String REQUIRED_FIELD = getString(R.string.editor_required_field);
+
         String title = mTitleEditText.getText().toString().trim();
         String author = mAuthorEditText.getText().toString().trim();
         String strPrice = mPriceEditText.getText().toString().trim();
@@ -148,8 +151,62 @@ public class EditorActivity extends AppCompatActivity implements
                 TextUtils.isEmpty(strQuantity) &&
                 TextUtils.isEmpty(supplierName) &&
                 TextUtils.isEmpty(supplierPhone)) {
+
+            Toast.makeText(this, getString(R.string.editor_all_fields_required),
+                    Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if(!TextUtils.isEmpty(strPrice)) {
+            if(Double.parseDouble(strPrice) <= 0) {
+                mPriceEditText.setError(getString(R.string.editor_min_price_warning));
+                mPriceEditText.setText(getString(R.string.editor_min_price));
+                return;
+            }
+        }
+        else {
+            mPriceEditText.setError(REQUIRED_FIELD);
+            return;
+        }
+
+        if(!TextUtils.isEmpty(strQuantity)) {
+            int quantity = Integer.parseInt(strQuantity);
+            if(quantity > 100) {
+                mQuantityEditText.setError(getString(R.string.editor_quantity_range_warning));
+                mQuantityEditText.setText(getString(R.string.editor_max_quantity));
+                return;
+            }
+            if(quantity < 0) {
+                mQuantityEditText.setError(getString(R.string.editor_quantity_range_warning));
+                mQuantityEditText.setText(getString(R.string.editor_min_quantity));
+                return;
+            }
+        }
+        else {
+            mQuantityEditText.setError(REQUIRED_FIELD);
+            return;
+        }
+
+        if (TextUtils.isEmpty(title)) {
+            mTitleEditText.setError(REQUIRED_FIELD);
+            return;
+        }
+
+        if (TextUtils.isEmpty(author)) {
+            mAuthorEditText.setError(REQUIRED_FIELD);
+            return;
+        }
+
+        if (TextUtils.isEmpty(supplierName)) {
+            mSupplierNameEditText.setError(REQUIRED_FIELD);
+            return;
+        }
+
+        if (TextUtils.isEmpty(supplierPhone)) {
+            mSupplierPhoneEditText.setError(REQUIRED_FIELD);
+            return;
+        }
+
 
         // TODO Ensure that the values are not empty
         double price = Double.parseDouble(strPrice);
@@ -185,6 +242,7 @@ public class EditorActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.editor_update_book_successful), Toast.LENGTH_SHORT).show();
             }
         }
+        finish();
     }
 
     @Override
@@ -210,7 +268,6 @@ public class EditorActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             case R.id.action_save:
                 saveBook();
-                finish();
                 return true;
             case R.id.action_delete:
                 showDeleteConfirmationDialog();
