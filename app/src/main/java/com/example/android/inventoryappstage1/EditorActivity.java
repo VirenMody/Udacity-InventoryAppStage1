@@ -40,6 +40,7 @@ public class EditorActivity extends AppCompatActivity implements
     private EditText mSupplierPhoneEditText;
     private Button mIncrementQuantityBtn;
     private Button mDecrementQuantityBtn;
+    private Button mCallSupplierBtn;
 
     private boolean mBookHasChanged = false;
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
@@ -56,7 +57,6 @@ public class EditorActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_editor);
 
         Intent intent = getIntent();
-        Log.d(LOG_TAG, intent.toString());
         mCurrentBookUri = intent.getData();
         Log.d(LOG_TAG, mCurrentBookUri + "");
 
@@ -123,6 +123,24 @@ public class EditorActivity extends AppCompatActivity implements
                 mQuantityEditText.setText(strQuantity);
             }
         });
+        mCallSupplierBtn = (Button) findViewById(R.id.call_supplier);
+        mCallSupplierBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                String supplierPhone = mSupplierPhoneEditText.getText().toString().trim();
+                supplierPhone = supplierPhone.replaceAll("[^\\d]", "");
+                mSupplierPhoneEditText.setText(supplierPhone);
+                if(!TextUtils.isEmpty(supplierPhone) && (supplierPhone.length() == 10)){
+                    intent.setData(Uri.parse("tel:" + supplierPhone));
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(EditorActivity.this, getString(R.string.editor_phone_length_warning),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         mTitleEditText.setOnTouchListener(mTouchListener);
         mAuthorEditText.setOnTouchListener(mTouchListener);
@@ -186,6 +204,19 @@ public class EditorActivity extends AppCompatActivity implements
             return;
         }
 
+        if (!TextUtils.isEmpty(supplierPhone)) {
+            supplierPhone = supplierPhone.replaceAll("[^\\d]", "");
+            mSupplierPhoneEditText.setText(supplierPhone);
+            if(supplierPhone.length() != 10) {
+                mSupplierPhoneEditText.setError(getString(R.string.editor_phone_length_warning));
+                return;
+            }
+        }
+        else {
+            mSupplierPhoneEditText.setError(REQUIRED_FIELD);
+            return;
+        }
+
         if (TextUtils.isEmpty(title)) {
             mTitleEditText.setError(REQUIRED_FIELD);
             return;
@@ -198,11 +229,6 @@ public class EditorActivity extends AppCompatActivity implements
 
         if (TextUtils.isEmpty(supplierName)) {
             mSupplierNameEditText.setError(REQUIRED_FIELD);
-            return;
-        }
-
-        if (TextUtils.isEmpty(supplierPhone)) {
-            mSupplierPhoneEditText.setError(REQUIRED_FIELD);
             return;
         }
 

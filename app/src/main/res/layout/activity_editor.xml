@@ -60,8 +60,9 @@
                     android:layout_height="wrap_content"
                     android:layout_width="@dimen/spacing_zero"
                     android:layout_weight="1"
+                    android:textAppearance="?android:textAppearanceMedium"
                     android:text="@string/button_increment"
-                    android:textAppearance="?android:textAppearanceMedium"/>
+                    />
 
                 <EditText
                     android:id="@+id/edit_quantity"
@@ -78,8 +79,8 @@
                     android:layout_height="wrap_content"
                     android:layout_width="@dimen/spacing_zero"
                     android:layout_weight="1"
-                    android:text="@string/button_decrement"
-                    android:textAppearance="?android:textAppearanceLarge"/>
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:text="@string/button_decrement"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -115,6 +116,15 @@
                 android:hint="@string/hint_supplier_phone"
                 android:inputType="phone"
                 style="@style/EditorFieldStyle" />
+
+            <Button
+                android:id="@+id/call_supplier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_medium"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@android:color/white"
+                android:text="@string/call_supplier"/>
 
         </LinearLayout>
     </LinearLayout>

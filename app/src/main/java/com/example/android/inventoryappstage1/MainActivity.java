@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         values.put(InventoryEntry.COLUMN_BOOK_PRICE, 19.99);
         values.put(InventoryEntry.COLUMN_BOOK_QUANTITY, 3);
         values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME, "Little, Brown and Company");
-        values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE, "(312) 555-5555");
+        values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE, "3125555555");
 
         Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
         if(null == newUri) {

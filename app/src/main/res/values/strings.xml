@@ -17,7 +17,8 @@
     <string name="editor_insert_book_failed">Error adding book!</string>
     <string name="editor_insert_book_successful">Book added to inventory!</string>
 
-    <string name="empty_view_text">There are no books in the inventory!</string>
+    <string name="empty_view_text">There are no books in the inventory!\n Hit the plus sign
+        below to add a book!</string>
 
     <string name="item_quantity">Quantity: <xliff:g id="quantity" example="5">%s</xliff:g></string>
     <string name="item_price">Price: $<xliff:g id="price" example="$5.00">%s</xliff:g></string>
@@ -50,4 +51,6 @@
     <string name="editor_max_quantity">100</string>
     <string name="editor_min_quantity">0</string>
     <string name="editor_all_fields_required">All fields are required.</string>
+    <string name="call_supplier">Call Supplier</string>
+    <string name="editor_phone_length_warning">Phone number must be 10 digits long.</string>
 </resources>
