@@ -40,6 +40,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/sale"
             android:layout_height="match_parent"
             android:layout_width="@dimen/spacing_zero"
             android:layout_weight="1"
